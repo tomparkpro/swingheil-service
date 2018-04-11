@@ -4,6 +4,8 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext {
         springBootVersion = '1.4.2.RELEASE'
+        querydslVersion = '4.1.4'
+        metaModelsSourcesDir = file("src/main/genq")
     }
 
     repositories {
@@ -18,8 +20,12 @@ buildscript {
     }
 }
 
+configurations {
+    querydslapt
+}
+
 apply plugin: 'java'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 
@@ -31,9 +37,40 @@ repositories {
     maven { url "http://repo.spring.io/milestone" }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir metaModelsSourcesDir
+        }
+    }
+}
+
 dependencies {
     compile("com.h2database:h2")
     compile("org.springframework.boot:spring-boot-starter")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    //QueryDSL
+    compile("com.querydsl:querydsl-core:${querydslVersion}")
+    compile("com.querydsl:querydsl-jpa:${querydslVersion}")
+    querydslapt("com.querydsl:querydsl-apt:${querydslVersion}")
+
     testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+task querymodels(type: JavaCompile, group: 'build') {
+    doFirst {
+        delete metaModelsSourcesDir;
+        metaModelsSourcesDir.mkdirs();
+    }
+
+    classpath = configurations.compile + configurations.querydslapt
+    destinationDir = metaModelsSourcesDir
+
+    source = sourceSets.main.java
+    options.compilerArgs = [
+            "-proc:only",
+            "-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor",
+            "-s", metaModelsSourcesDir
+    ]
 }
