@@ -9,8 +9,6 @@ import pro.tompark.swingheil.model.QEvent;
 import pro.tompark.swingheil.repository.EventRepository;
 import pro.tompark.swingheil.service.EventService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -23,11 +21,15 @@ import java.util.List;
 @Transactional
 public class EventServiceImpl implements EventService {
 
-    @Autowired
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final JPAQueryFactory queryFactory;
+
+    @Autowired
+    public EventServiceImpl(EventRepository eventRepository, JPAQueryFactory queryFactory) {
+        this.eventRepository = eventRepository;
+        this.queryFactory = queryFactory;
+    }
 
     @Override
     public Event createEvent(Event event) {
@@ -36,16 +38,23 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event getEvent(Long eventSn) {
-        return eventRepository.getOne(eventSn);
+        return eventRepository.findOne(eventSn);
     }
 
     @Override
     public List<Event> getEvents() {
-        JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
-
         QEvent qEvent = QEvent.event;
         return queryFactory.selectFrom(qEvent).fetch();
     }
 
+    @Override
+    public Event updateEvent(Event event) {
+        return eventRepository.save(event);
+    }
+
+    @Override
+    public void deleteEvent(Long eventSn) {
+        eventRepository.delete(eventSn);
+    }
 
 }

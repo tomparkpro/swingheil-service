@@ -18,4 +18,8 @@ public interface EventService {
     Event getEvent(Long eventSn);
 
     List<Event> getEvents();
+
+    Event updateEvent(Event event);
+
+    void deleteEvent(Long eventSn);
 }

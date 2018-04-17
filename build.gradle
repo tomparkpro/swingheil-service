@@ -46,6 +46,7 @@ sourceSets {
 }
 
 dependencies {
+    compile("javax.inject:javax.inject:1")
     compile("com.h2database:h2")
     compile("org.springframework.boot:spring-boot-starter")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")

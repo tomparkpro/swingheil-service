@@ -12,4 +12,5 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({SwingheilConfig.class})
 public class SwingheilTestConfig {
+
 }

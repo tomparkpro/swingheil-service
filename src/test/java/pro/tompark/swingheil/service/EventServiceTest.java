@@ -6,10 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import pro.tompark.swingheil.code.EventType;
 import pro.tompark.swingheil.config.SwingheilTestConfig;
 import pro.tompark.swingheil.model.Event;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by TomPark
@@ -23,17 +28,36 @@ import java.util.List;
 public class EventServiceTest {
 
     @Autowired
-    EventService eventService;
+    private EventService eventService;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Test
     public void testCreateEvent() {
         Event event = new Event();
         event.setTitle("Event Title");
-        Event saved = eventService.createEvent(event);
+        Event createdEvent = eventService.createEvent(event);
 
-        Event selected = eventService.getEvent(saved.getEventSn());
+        em.flush();
 
-        System.err.println(selected.getTitle());
+        assertNotNull(createdEvent);
+        System.err.println(createdEvent.getTitle());
+    }
+
+    @Test
+    public void testGetEvent() {
+        Event event = new Event();
+        event.setTitle("Event Title");
+        Event created = eventService.createEvent(event);
+
+        em.flush();
+        em.clear();
+
+        Event selectedEvent = eventService.getEvent(created.getEventSn());
+
+        assertNotNull(selectedEvent);
+        System.err.println(selectedEvent.getTitle());
     }
 
     @Test
@@ -45,8 +69,52 @@ public class EventServiceTest {
         event2.setTitle("Event Title2");
         eventService.createEvent(event2);
 
-        List<Event> selectedEvents = eventService.getEvents();
+        em.flush();
+        em.clear();
 
-        System.err.println(selectedEvents);
+        List<Event> selectedEventList = eventService.getEvents();
+
+        assertNotNull(selectedEventList);
+
+        for (Event selectedEvent : selectedEventList) {
+            System.err.println(selectedEvent.getTitle());
+        }
+    }
+
+    @Test
+    public void testUpdateEvent() {
+        Event event = new Event();
+        event.setTitle("Event Title1");
+        event.setEventType(EventType.Notice);
+        Event createdEvent = eventService.createEvent(event);
+
+        em.flush();
+        em.clear();
+
+        createdEvent.setEventType(EventType.Lesson);
+        Event updatedEvent = eventService.updateEvent(createdEvent);
+
+        em.flush();
+        em.clear();
+
+        Event selectedEvent = eventService.getEvent(updatedEvent.getEventSn());
+        assertEquals(EventType.Lesson, selectedEvent.getEventType());
+        System.err.println(selectedEvent.getEventType());
+    }
+
+    @Test
+    public void testDeleteEvent() {
+        Event event = new Event();
+        event.setTitle("Event Title1");
+        event.setEventType(EventType.Notice);
+        Event createdEvent = eventService.createEvent(event);
+
+        eventService.deleteEvent(createdEvent.getEventSn());
+
+        em.flush();
+        em.clear();
+
+        Event selectedEvent = eventService.getEvent(createdEvent.getEventSn());
+        assertNull(selectedEvent);
     }
 }
