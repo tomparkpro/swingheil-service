@@ -1,11 +1,6 @@
-group 'pro.tompark.swingheil'
-version '1.0-SNAPSHOT'
-
 buildscript {
     ext {
-        springBootVersion = '1.4.2.RELEASE'
-        querydslVersion = '4.1.4'
-        metaModelsSourcesDir = file("src/main/genq")
+        springBootVersion = '2.0.1.RELEASE'
     }
 
     repositories {
@@ -13,65 +8,65 @@ buildscript {
         mavenCentral()
         maven { url "http://repo.spring.io/release" }
         maven { url "http://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.franzbecker:gradle-lombok:1.8")
     }
-}
-
-configurations {
-    querydslapt
 }
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'io.franzbecker.gradle-lombok'
 
+group 'pro.tompark.swingheil'
+version '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
-
 
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "http://repo.spring.io/release" }
-    maven { url "http://repo.spring.io/milestone" }
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir metaModelsSourcesDir
-        }
-    }
 }
 
 dependencies {
     compile("javax.inject:javax.inject:1")
-    compile("com.h2database:h2")
-    compile("org.springframework.boot:spring-boot-starter")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile('org.springframework.boot:spring-boot-starter')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
     //QueryDSL
-    compile("com.querydsl:querydsl-core:${querydslVersion}")
-    compile("com.querydsl:querydsl-jpa:${querydslVersion}")
-    querydslapt("com.querydsl:querydsl-apt:${querydslVersion}")
+    compile('com.querydsl:querydsl-jpa')
+    compile('com.querydsl:querydsl-core')
+    compile('com.querydsl:querydsl-apt')
 
+    runtime("com.h2database:h2")
+    compileOnly('org.projectlombok:lombok')
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
-task querymodels(type: JavaCompile, group: 'build') {
-    doFirst {
-        delete metaModelsSourcesDir;
-        metaModelsSourcesDir.mkdirs();
+/**** QueryDSL Class Generate Script ****/
+def queryDslOutput = file("src/main/genq")
+sourceSets {
+    main {
+        java {
+            srcDir queryDslOutput
+        }
     }
+}
 
-    classpath = configurations.compile + configurations.querydslapt
-    destinationDir = metaModelsSourcesDir
-
+task generateQueryDSL(type: JavaCompile, group: 'build') {
     source = sourceSets.main.java
+    classpath = configurations.compile
+    destinationDir = queryDslOutput
     options.compilerArgs = [
             "-proc:only",
-            "-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor",
-            "-s", metaModelsSourcesDir
+            "-processor", 'com.querydsl.apt.jpa.JPAAnnotationProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor'
     ]
+}
+compileJava.dependsOn(generateQueryDSL)
+
+clean {
+    delete queryDslOutput
 }

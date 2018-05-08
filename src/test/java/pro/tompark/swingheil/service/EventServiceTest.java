@@ -13,6 +13,7 @@ import pro.tompark.swingheil.model.Event;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -54,10 +55,10 @@ public class EventServiceTest {
         em.flush();
         em.clear();
 
-        Event selectedEvent = eventService.getEvent(created.getEventSn());
+        Optional<Event> selectedEvent = eventService.getEvent(created.getEventSn());
 
         assertNotNull(selectedEvent);
-        System.err.println(selectedEvent.getTitle());
+        System.err.println(selectedEvent.map(Event::getTitle));
     }
 
     @Test
@@ -97,9 +98,9 @@ public class EventServiceTest {
         em.flush();
         em.clear();
 
-        Event selectedEvent = eventService.getEvent(updatedEvent.getEventSn());
-        assertEquals(EventType.Lesson, selectedEvent.getEventType());
-        System.err.println(selectedEvent.getEventType());
+        Optional<Event> selectedEvent = eventService.getEvent(updatedEvent.getEventSn());
+        assertEquals(EventType.Lesson, selectedEvent.map(Event::getEventType).get());
+        System.err.println(selectedEvent.map(Event::getEventType));
     }
 
     @Test
@@ -114,7 +115,7 @@ public class EventServiceTest {
         em.flush();
         em.clear();
 
-        Event selectedEvent = eventService.getEvent(createdEvent.getEventSn());
-        assertNull(selectedEvent);
+        Optional<Event> selectedEvent = eventService.getEvent(createdEvent.getEventSn());
+        assertEquals(Optional.empty(), selectedEvent);
     }
 }

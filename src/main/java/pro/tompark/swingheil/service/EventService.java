@@ -4,6 +4,7 @@ package pro.tompark.swingheil.service;
 import pro.tompark.swingheil.model.Event;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by TomPark
@@ -15,7 +16,7 @@ public interface EventService {
 
     Event createEvent(Event event);
 
-    Event getEvent(Long eventSn);
+    Optional<Event> getEvent(Long eventSn);
 
     List<Event> getEvents();
 

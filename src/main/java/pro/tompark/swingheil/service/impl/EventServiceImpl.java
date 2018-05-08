@@ -10,6 +10,7 @@ import pro.tompark.swingheil.repository.EventRepository;
 import pro.tompark.swingheil.service.EventService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by TomPark
@@ -37,8 +38,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event getEvent(Long eventSn) {
-        return eventRepository.findOne(eventSn);
+    public Optional<Event> getEvent(Long eventSn) {
+        return eventRepository.findById(eventSn);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void deleteEvent(Long eventSn) {
-        eventRepository.delete(eventSn);
+        eventRepository.deleteById(eventSn);
     }
 
 }
