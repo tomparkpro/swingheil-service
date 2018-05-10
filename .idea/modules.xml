@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swingheil-service.iml" filepath="$PROJECT_DIR$/.idea/modules/swingheil-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swingheil-service_main.iml" filepath="$PROJECT_DIR$/.idea/modules/swingheil-service_main.iml" group="swingheil-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swingheil-service_test.iml" filepath="$PROJECT_DIR$/.idea/modules/swingheil-service_test.iml" group="swingheil-service" />
+    </modules>
+  </component>
+</project>
