@@ -43,7 +43,7 @@ public class EventServiceTest {
         em.flush();
 
         assertNotNull(createdEvent);
-        System.err.println(createdEvent.getTitle());
+        System.err.println(createdEvent);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class EventServiceTest {
         assertNotNull(selectedEventList);
 
         for (Event selectedEvent : selectedEventList) {
-            System.err.println(selectedEvent.getTitle());
+            System.err.println(selectedEvent);
         }
     }
 

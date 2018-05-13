@@ -17,17 +17,17 @@ import java.util.Date;
 @ToString
 @Entity
 @Table(name="event")
-public class Event {
+public class Event extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="event_sn", nullable = false)
     private Long eventSn;
 
-    @Column(name = "title")
+    @Column(name = "title", length = 300)
     private String title;
 
-    @Column(name = "body_text")
+    @Column(name = "body_text", length = 3000)
     private String bodyText;
 
     @Column(name = "start_dt")
