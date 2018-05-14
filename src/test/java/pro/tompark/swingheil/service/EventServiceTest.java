@@ -1,8 +1,10 @@
 package pro.tompark.swingheil.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -33,6 +35,14 @@ public class EventServiceTest {
 
     @PersistenceContext
     private EntityManager em;
+
+    @Value("${spring.profileName}")
+    private String profileName;
+
+    @Before
+    public void init() {
+        System.err.println("Testing in " + profileName + " environment.");
+    }
 
     @Test
     public void testCreateEvent() {

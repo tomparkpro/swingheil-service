@@ -1,0 +1,47 @@
+spring:
+  profiles:
+    active: local
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: h2
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+        use_sql_comments: true
+
+logging:
+  config: classpath:logback/logback-test.xml
+
+---
+spring:
+  profiles: local
+  profileName: local profile
+
+---
+spring:
+  profiles: dev
+  profileName: dev profile
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+---
+spring:
+  profiles: prd
+  profileName: prd profile
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql_comments: false
+    hibernate:
+      ddl-auto: validate
+logging:
+  config: classpath:logback/logback.xml
