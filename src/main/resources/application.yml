@@ -2,46 +2,63 @@ spring:
   profiles:
     active: local
 
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://localhost:3306/swingheil?verifyServerCertificate=false&useSSL=false&requireSSL=false
+    username: swingheiladmin
+    password: swingheiladmin
+
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    database: h2
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     properties:
       hibernate:
-        format_sql: true
-        show_sql: false
-        use_sql_comments: true
+          show_sql: false
+          format_sql: true
+          use_sql_comments: false
 
 logging:
-  config: classpath:logback/logback-test.xml
+  level:
+    jdbc:
+      sqlonly: FATAL
+      audit: FATAL
+      connection: FATAL
 
+
+## LOCAL ENVIRONMENT
 ---
 spring:
   profiles: local
-  profileName: local profile
 
+  datasource:
+    url: jdbc:log4jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: h2
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+          show_sql: true
+
+## DEVELOPMENT ENVIRONMENT
 ---
 spring:
   profiles: dev
-  profileName: dev profile
 
-  jpa:
-    hibernate:
-      ddl-auto: validate
+
+## PRODUCTION ENVIRONMENT
 ---
 spring:
   profiles: prd
-  profileName: prd profile
 
-  jpa:
-    properties:
-      hibernate:
-        format_sql: false
-        use_sql_comments: false
-    hibernate:
-      ddl-auto: validate
-logging:
-  config: classpath:logback/logback.xml
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://localhost:3306/swingheil?verifyServerCertificate=false&useSSL=false&requireSSL=false
+    username: swingheiladmin
+    password: swingheiladmin

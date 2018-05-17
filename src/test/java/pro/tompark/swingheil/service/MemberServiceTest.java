@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import pro.tompark.swingheil.config.SwingheilTestConfig;
@@ -17,8 +18,7 @@ import pro.tompark.swingheil.repository.MemberRepository;
  * github : http://github.com/tomparkpro
  */
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@ContextConfiguration(classes = {SwingheilTestConfig.class})
+@SpringBootTest
 public class MemberServiceTest {
 
     @Autowired

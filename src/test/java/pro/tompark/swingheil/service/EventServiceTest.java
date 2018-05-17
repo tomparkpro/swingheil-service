@@ -4,20 +4,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pro.tompark.swingheil.code.EventType;
 import pro.tompark.swingheil.config.SwingheilTestConfig;
 import pro.tompark.swingheil.model.Event;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by TomPark
@@ -26,22 +23,14 @@ import static org.junit.Assert.*;
  * github : http://github.com/tomparkpro
  */
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@ContextConfiguration(classes = {SwingheilTestConfig.class})
+@SpringBootTest//(classes = SwingheilTestConfig.class)
 public class EventServiceTest {
 
     @Autowired
     private EventService eventService;
 
-    @PersistenceContext
-    private EntityManager em;
-
-    @Value("${spring.profileName}")
-    private String profileName;
-
     @Before
     public void init() {
-        System.err.println("Testing in " + profileName + " environment.");
     }
 
     @Test
@@ -49,8 +38,6 @@ public class EventServiceTest {
         Event event = new Event();
         event.setTitle("Event Title");
         Event createdEvent = eventService.createEvent(event);
-
-        em.flush();
 
         assertNotNull(createdEvent);
         System.err.println(createdEvent);
@@ -61,9 +48,6 @@ public class EventServiceTest {
         Event event = new Event();
         event.setTitle("Event Title");
         Event created = eventService.createEvent(event);
-
-        em.flush();
-        em.clear();
 
         Optional<Event> selectedEvent = eventService.getEvent(created.getEventSn());
 
@@ -79,9 +63,6 @@ public class EventServiceTest {
         Event event2 = new Event();
         event2.setTitle("Event Title2");
         eventService.createEvent(event2);
-
-        em.flush();
-        em.clear();
 
         List<Event> selectedEventList = eventService.getEvents();
 
@@ -99,14 +80,10 @@ public class EventServiceTest {
         event.setEventType(EventType.Notice);
         Event createdEvent = eventService.createEvent(event);
 
-        em.flush();
-        em.clear();
 
         createdEvent.setEventType(EventType.Lesson);
         Event updatedEvent = eventService.updateEvent(createdEvent);
 
-        em.flush();
-        em.clear();
 
         Optional<Event> selectedEvent = eventService.getEvent(updatedEvent.getEventSn());
         assertEquals(EventType.Lesson, selectedEvent.map(Event::getEventType).get());
@@ -122,8 +99,6 @@ public class EventServiceTest {
 
         eventService.deleteEvent(createdEvent.getEventSn());
 
-        em.flush();
-        em.clear();
 
         Optional<Event> selectedEvent = eventService.getEvent(createdEvent.getEventSn());
         assertEquals(Optional.empty(), selectedEvent);

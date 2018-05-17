@@ -36,7 +36,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event createEvent(Event event) {
-        log.debug("createEvent");
         return eventRepository.save(event);
     }
 

@@ -35,14 +35,16 @@ dependencies {
     compile("javax.inject:javax.inject:1")
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('ch.qos.logback:logback-core:1.2.3')
-    compile('ch.qos.logback:logback-classic:1.2.3')
+
+    // for logging sql query
+    compile("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
 
     //QueryDSL
     compile('com.querydsl:querydsl-jpa')
     compile('com.querydsl:querydsl-core')
     compile('com.querydsl:querydsl-apt')
 
+    compile('mysql:mysql-connector-java')
     runtime("com.h2database:h2")
     compileOnly('org.projectlombok:lombok')
     testCompile("org.springframework.boot:spring-boot-starter-test")

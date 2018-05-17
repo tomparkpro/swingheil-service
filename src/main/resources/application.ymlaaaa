@@ -1,0 +1,22 @@
+spring:
+  profiles: default
+  datasource:
+    url: jdbc:log4jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#    username:
+#    password:
+
+  jpa:
+      properties:
+        hibernate:
+          show_sql: true
+          format_sql: true
+          use_sql_comments: false
+          dialect: org.hibernate.dialect.H2Dialect
+
+logging:
+  level:
+    jdbc:
+      sqlonly: FATAL
+      audit: FATAL
+      connection: FATAL
