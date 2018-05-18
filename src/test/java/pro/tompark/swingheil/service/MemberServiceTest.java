@@ -3,13 +3,11 @@ package pro.tompark.swingheil.service;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import pro.tompark.swingheil.config.SwingheilTestConfig;
 import pro.tompark.swingheil.model.Member;
-import pro.tompark.swingheil.repository.MemberRepository;
+
+import java.util.Optional;
 
 /**
  * Created by TomPark
@@ -30,8 +28,9 @@ public class MemberServiceTest {
         member.setNickname("Tom");
         Member saved = memberService.createMember(member);
 
-        Member selected = memberService.getMember(saved.getMemberSn());
+        Optional<Member> selected = memberService.getMember(saved.getMemberSn());
 
-        System.err.println(selected.getNickname());
+        System.err.println(selected.map(Member::getMemberSn));
+        System.err.println(selected.map(Member::getNickname));
     }
 }

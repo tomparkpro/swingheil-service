@@ -8,6 +8,7 @@ import pro.tompark.swingheil.repository.MemberRepository;
 import pro.tompark.swingheil.service.MemberService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by TomPark
@@ -28,8 +29,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member getMember(Long memberSn) {
-        return memberRepository.getOne(memberSn);
+    public Optional<Member> getMember(Long memberSn) {
+        return memberRepository.findById(memberSn);
     }
 
     @Override

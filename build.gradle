@@ -39,13 +39,16 @@ dependencies {
     // for logging sql query
     compile("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
 
-    //QueryDSL
+    // for QueryDSL
     compile('com.querydsl:querydsl-jpa')
     compile('com.querydsl:querydsl-core')
     compile('com.querydsl:querydsl-apt')
 
+    // for DB connection
     compile('mysql:mysql-connector-java')
     runtime("com.h2database:h2")
+
+    // for JUnit Test
     compileOnly('org.projectlombok:lombok')
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }

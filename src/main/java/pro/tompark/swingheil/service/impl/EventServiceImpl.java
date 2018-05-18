@@ -46,8 +46,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getEvents() {
-        QEvent qEvent = QEvent.event;
-        return queryFactory.selectFrom(qEvent).fetch();
+        return eventRepository.findAll();
+//        QEvent qEvent = QEvent.event;
+//        return queryFactory.selectFrom(qEvent).fetch();
     }
 
     @Override

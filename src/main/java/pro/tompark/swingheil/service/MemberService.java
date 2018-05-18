@@ -1,11 +1,10 @@
 package pro.tompark.swingheil.service;
 
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pro.tompark.swingheil.model.Member;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by TomPark
@@ -17,7 +16,7 @@ public interface MemberService {
 
     Member createMember(Member member);
 
-    Member getMember(Long memberSn);
+    Optional<Member> getMember(Long memberSn);
 
     List<Member> getMembers();
 }

@@ -5,9 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import pro.tompark.swingheil.code.EventType;
-import pro.tompark.swingheil.config.SwingheilTestConfig;
 import pro.tompark.swingheil.model.Event;
 
 import java.util.List;
@@ -24,17 +25,25 @@ import static org.junit.Assert.assertNotNull;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest//(classes = SwingheilTestConfig.class)
+@Transactional
 public class EventServiceTest {
+
+    @Autowired
+    private Environment env;
 
     @Autowired
     private EventService eventService;
 
     @Before
     public void init() {
+        System.err.println("SWINGHEIL_DB_USERNAME: " + env.getProperty("SWINGHEIL_DB_USERNAME"));
+//        System.err.println("SWINGHEIL_DB_PASSWORD: " + env.getProperty("SWINGHEIL_DB_PASSWORD"));
     }
 
     @Test
     public void testCreateEvent() {
+
+
         Event event = new Event();
         event.setTitle("Event Title");
         Event createdEvent = eventService.createEvent(event);
