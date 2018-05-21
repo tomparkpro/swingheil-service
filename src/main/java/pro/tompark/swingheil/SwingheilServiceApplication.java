@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * github : http://github.com/tomparkpro
  */
 @SpringBootApplication
-public class Application {
+public class SwingheilServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(SwingheilServiceApplication.class, args);
     }
 }

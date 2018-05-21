@@ -37,5 +37,6 @@ public class Event extends BaseEntity {
     private Date endDt;
 
     @Column(name = "event_type")
+    @Enumerated(EnumType.STRING)
     private EventType eventType;
 }

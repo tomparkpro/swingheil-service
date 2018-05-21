@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import pro.tompark.swingheil.code.EventType;
@@ -24,7 +25,7 @@ import static org.junit.Assert.assertNotNull;
  * github : http://github.com/tomparkpro
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest//(classes = SwingheilTestConfig.class)
+@SpringBootTest
 @Transactional
 public class EventServiceTest {
 
@@ -37,15 +38,14 @@ public class EventServiceTest {
     @Before
     public void init() {
         System.err.println("SWINGHEIL_DB_USERNAME: " + env.getProperty("SWINGHEIL_DB_USERNAME"));
-//        System.err.println("SWINGHEIL_DB_PASSWORD: " + env.getProperty("SWINGHEIL_DB_PASSWORD"));
+        System.err.println("SWINGHEIL_DB_PASSWORD: " + env.getProperty("SWINGHEIL_DB_PASSWORD"));
     }
 
     @Test
     public void testCreateEvent() {
-
-
         Event event = new Event();
         event.setTitle("Event Title");
+        event.setEventType(EventType.Notice);
         Event createdEvent = eventService.createEvent(event);
 
         assertNotNull(createdEvent);
