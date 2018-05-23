@@ -16,23 +16,33 @@ public enum EventType {
      * <li>Notice</li>
      * </ul>
      */
-    Notice,
+    Notice("Notice"),
     /**
      * <ul>
      * <li>Lesson</li>
      * </ul>
      */
-    Lesson,
+    Lesson("Lesson"),
     /**
      * <ul>
      * <li>Social</li>
      * </ul>
      */
-    Social,
+    Social("Social"),
     /**
      * <ul>
      * <li>Competition</li>
      * </ul>
      */
-    Competition,
+    Competition("Competition");
+
+    private String id;
+
+    EventType(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 }
