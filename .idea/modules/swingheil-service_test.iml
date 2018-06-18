@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module version="4">
-  <component name="ExternalSystem" externalSystem="GRADLE" externalSystemModuleGroup="pro.tompark.swingheil" externalSystemModuleType="sourceSet" externalSystemModuleVersion="0.1.0.RELEAS" linkedProjectId="swingheil-service:test" linkedProjectPath="$MODULE_DIR$/../.." rootProjectPath="$MODULE_DIR$/../.." />
+  <component name="ExternalSystem" externalSystem="GRADLE" externalSystemModuleGroup="pro.tompark.swingheil" externalSystemModuleType="sourceSet" externalSystemModuleVersion="0.1.1.RELEASE" linkedProjectId="swingheil-service:test" linkedProjectPath="$MODULE_DIR$/../.." rootProjectPath="$MODULE_DIR$/../.." />
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration />

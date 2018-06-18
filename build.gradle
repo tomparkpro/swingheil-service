@@ -1,7 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.0.1.RELEASE'
-        swingheilVersion = '0.1.0.RELEASE'
+        swingheilVersion = '0.1.1.RELEASE'
     }
 
     repositories {
@@ -25,6 +25,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'io.franzbecker.gradle-lombok'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
+
 
 group 'pro.tompark.swingheil'
 version "${swingheilVersion}"
@@ -81,6 +82,10 @@ compileJava.dependsOn(generateQueryDSL)
 clean {
     delete queryDslOutput
 }
+
+// enable jar for publishing normal jar
+bootJar.enabled = false
+jar.enabled = true
 
 publishing {
     publications {
