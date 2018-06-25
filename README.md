@@ -44,6 +44,7 @@ please check "Enable annotation processing" from IntelliJ Preferences.
 The swingheil-service is licensed under the terms of the GPL Open Source
 license and is available for free.
 
+
 ## Links
 
 * [Facebook page](https://www.facebook.com/swingheilapp)
