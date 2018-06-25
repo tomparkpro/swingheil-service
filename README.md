@@ -32,12 +32,12 @@ please check "Enable annotation processing" from IntelliJ Preferences.
 
 ### Development RoadMap
 
-- ~~initial setup springboot project~~
-- ~~add JPA feature~~
-- ~~add simple testcase for service~~
-- ~~upload jar to Bintray~~
-- add event model and service
-- add member feature
+- [x] initial setup springboot project
+- [x] add JPA feature
+- [x] add simple testcase for service
+- [x] upload jar to Bintray
+- [ ] update event model and service
+- [ ] add member feature
 
 ## License
 
