@@ -34,6 +34,7 @@ please check "Enable annotation processing" from IntelliJ Preferences.
 
 - [x] initial setup springboot project
 - [x] add JPA feature
+- [x] add Query DSL feature
 - [x] add simple testcase for service
 - [x] upload jar to Bintray
 - [ ] update event model and service
