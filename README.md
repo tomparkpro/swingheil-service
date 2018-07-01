@@ -5,7 +5,7 @@
 swingheil-service library
 ======================
 
-The swingheil-service is used by [swingheil-web-app](https://github.com/tomparkpro/swingheil-web-app) and [swingheil-rest-api](https://github.com/tomparkpro/swingheil-rest-api) projects.
+The swingheil-service has core service logic for SwingHeil and used by [swingheil-web-app](https://github.com/tomparkpro/swingheil-web-app) and [swingheil-rest-api](https://github.com/tomparkpro/swingheil-rest-api) projects.
 
 [![SwingHeil App Banner](https://t1.daumcdn.net/cfile/tistory/9912074C5B3066E107)](https://github.com/tomparkpro/swingheil-service/)
 
@@ -13,6 +13,7 @@ The swingheil-service is used by [swingheil-web-app](https://github.com/tomparkp
 
 - [Installation](#installation)
     - [Upload Bintray](#upload-to-bintray)
+- [Techlonogy](#technology)
 - [Development RoadMap](#development-roadmap)
 - [License](#license)
 - [Links](#links)
@@ -30,7 +31,12 @@ please check "Enable annotation processing" from IntelliJ Preferences.
 ./gradlew clean build bintrayUpload --info
 
 
-### Development RoadMap
+## Technology
+
+- Spring Boot, JPA, Java 8, Java EE, Hibernate, gradle, yml, Heroku, MySQL, JCenter, Bintray
+
+
+## Development RoadMap
 
 - [x] initial setup springboot project
 - [x] add JPA feature
@@ -39,6 +45,7 @@ please check "Enable annotation processing" from IntelliJ Preferences.
 - [x] upload jar to Bintray
 - [ ] update event model and service
 - [ ] add member feature
+
 
 ## License
 
