@@ -1,10 +1,5 @@
 package pro.tompark.swingheil.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.util.StringUtils;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
@@ -17,15 +12,11 @@ import java.util.Date;
  * @author tom.hyunung.park@gmail.com
  * github : http://github.com/tomparkpro
  */
-@Getter
-@Setter
-@ToString
 @MappedSuperclass
 public class BaseEntity {
 
     @Column(name = "created_dt", updatable = false)
     private Date createdDt;
-
 
     @Column(name = "updated_dt")
     private Date updatedDt;
@@ -40,5 +31,21 @@ public class BaseEntity {
     @PreUpdate
     protected void preUpdate() {
         updatedDt = new Date();
+    }
+
+    public Date getCreatedDt() {
+        return createdDt;
+    }
+
+    public void setCreatedDt(Date createdDt) {
+        this.createdDt = createdDt;
+    }
+
+    public Date getUpdatedDt() {
+        return updatedDt;
+    }
+
+    public void setUpdatedDt(Date updatedDt) {
+        this.updatedDt = updatedDt;
     }
 }

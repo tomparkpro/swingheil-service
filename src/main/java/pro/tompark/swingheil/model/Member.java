@@ -1,9 +1,5 @@
 package pro.tompark.swingheil.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import javax.persistence.*;
 
 /**
@@ -12,9 +8,6 @@ import javax.persistence.*;
  * @author tom.hyunung.park@gmail.com
  * github : http://github.com/tomparkpro
  */
-@Getter
-@Setter
-@ToString
 @Entity
 @Table(name="member")
 public class Member extends BaseEntity {
@@ -26,4 +19,20 @@ public class Member extends BaseEntity {
 
     @Column(name = "nickname")
     private String nickname;
+
+    public Long getMemberSn() {
+        return memberSn;
+    }
+
+    public void setMemberSn(Long memberSn) {
+        this.memberSn = memberSn;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }

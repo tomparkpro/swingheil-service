@@ -1,12 +1,10 @@
 package pro.tompark.swingheil.service.impl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pro.tompark.swingheil.model.Event;
-import pro.tompark.swingheil.model.QEvent;
 import pro.tompark.swingheil.repository.EventRepository;
 import pro.tompark.swingheil.service.EventService;
 
@@ -19,7 +17,6 @@ import java.util.Optional;
  * @author tom.hyunung.park@gmail.com
  * github : http://github.com/tomparkpro
  */
-@Slf4j
 @Service
 @Transactional
 public class EventServiceImpl implements EventService {

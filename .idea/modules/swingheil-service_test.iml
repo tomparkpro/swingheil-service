@@ -28,7 +28,6 @@
     <orderEntry type="library" name="Gradle: com.querydsl:querydsl-jpa:4.1.4" level="project" />
     <orderEntry type="library" name="Gradle: com.querydsl:querydsl-core:4.1.4" level="project" />
     <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.46" level="project" />
-    <orderEntry type="library" name="Gradle: org.projectlombok:lombok:1.16.4" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-test-autoconfigure:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:2.0.1.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.h2database:h2:1.4.197" level="project" />

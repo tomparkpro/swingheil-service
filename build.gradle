@@ -14,7 +14,6 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("io.franzbecker:gradle-lombok:1.8")
         classpath('com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7')
     }
 }
@@ -22,7 +21,6 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'io.franzbecker.gradle-lombok'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
@@ -54,7 +52,6 @@ dependencies {
     runtime("com.h2database:h2")
 
     // for JUnit Test
-    compileOnly('org.projectlombok:lombok')
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -74,7 +71,7 @@ task generateQueryDSL(type: JavaCompile, group: 'build') {
     destinationDir = queryDslOutput
     options.compilerArgs = [
             "-proc:only",
-            "-processor", 'com.querydsl.apt.jpa.JPAAnnotationProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor'
+            "-processor", 'com.querydsl.apt.jpa.JPAAnnotationProcessor'
     ]
 }
 compileJava.dependsOn(generateQueryDSL)
